@@ -26,13 +26,22 @@ def get_db():
 FRONTEND_DIR = os.path.join(os.path.dirname(__file__), "..", "frontend")
 app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
+# Default home → qics-dashboard
 @app.get("/")
-def serve_index():
+def serve_home():
+    return FileResponse(os.path.join(FRONTEND_DIR, "qics-dashboard.html"))
+
+# Keep login page available at /login
+@app.get("/login")
+def serve_login():
     return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
+# Old dashboard route
 @app.get("/dashboard")
 def serve_dashboard():
     return FileResponse(os.path.join(FRONTEND_DIR, "dashboard.html"))
+
+# Explicit qics-dashboard route too
 @app.get("/qics-dashboard")
 def serve_qics_dashboard():
     return FileResponse(os.path.join(FRONTEND_DIR, "qics-dashboard.html"))
