@@ -33,6 +33,10 @@ def serve_index():
 @app.get("/dashboard")
 def serve_dashboard():
     return FileResponse(os.path.join(FRONTEND_DIR, "dashboard.html"))
+@app.get("/qics-dashboard")
+def serve_qics_dashboard():
+    return FileResponse(os.path.join(FRONTEND_DIR, "qics-dashboard.html"))
+
 
 # --------------- Health check ---------------
 @app.get("/api/health")
